@@ -1,0 +1,777 @@
+{
+	"info": {
+		"_postman_id": "complete-user-api-collection",
+		"name": "Complete User API - Valle Grande",
+		"description": "Colección completa de endpoints para el microservicio de usuarios de Valle Grande",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin User Management (/api/v1/user-admin)",
+			"item": [
+				{
+					"name": "Create Admin/Director User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin001\",\n  \"firstname\": \"Juan\",\n  \"lastname\": \"Pérez\",\n  \"email\": \"admin@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"12345678\",\n  \"phone\": \"+51987654321\",\n  \"roles\": [\"admin\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-admin/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-admin",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Admin Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-admin/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-admin",
+								"users"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Director User Management (/api/v1/user-director)",
+			"item": [
+				{
+					"name": "Create Teacher User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"teacher001\",\n  \"firstname\": \"María\",\n  \"lastname\": \"García\",\n  \"email\": \"teacher@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"87654321\",\n  \"phone\": \"+51123456789\",\n  \"roles\": [\"teacher\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Auxiliary User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"auxiliary001\",\n  \"firstname\": \"Carlos\",\n  \"lastname\": \"López\",\n  \"email\": \"auxiliary@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"11223344\",\n  \"phone\": \"+51555666777\",\n  \"roles\": [\"auxiliary\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Secretary User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"secretary001\",\n  \"firstname\": \"Ana\",\n  \"lastname\": \"Ruiz\",\n  \"email\": \"secretary@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"99887766\",\n  \"phone\": \"+51444555666\",\n  \"roles\": [\"secretary\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by Keycloak ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/keycloak/{{keycloak_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"keycloak",
+								"{{keycloak_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/username/{{username}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"username",
+								"{{username}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"teacher001_updated\",\n  \"firstname\": \"María Actualizada\",\n  \"lastname\": \"García\",\n  \"email\": \"teacher_updated@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"87654321\",\n  \"phone\": \"+51123456789\",\n  \"roles\": [\"teacher\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/{{keycloak_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"{{keycloak_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/{{keycloak_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"{{keycloak_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Change User Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/{{keycloak_id}}/status?status=ACTIVE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"{{keycloak_id}}",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACTIVE",
+									"description": "ACTIVE, INACTIVE, SUSPENDED"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Activate User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/{{keycloak_id}}/activate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"{{keycloak_id}}",
+								"activate"
+							]
+						}
+					}
+				},
+				{
+					"name": "Deactivate User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/{{keycloak_id}}/deactivate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"{{keycloak_id}}",
+								"deactivate"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Users by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-director/users/status/ACTIVE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-director",
+								"users",
+								"status",
+								"ACTIVE"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "User Institution Management (/api/v1/user-institution)",
+			"item": [
+				{
+					"name": "Create User Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"keycloakId\": \"{{keycloak_id}}\",\n  \"username\": \"student001\",\n  \"firstname\": \"Pedro\",\n  \"lastname\": \"Martínez\",\n  \"email\": \"student@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"55667788\",\n  \"phone\": \"+51333444555\",\n  \"status\": \"ACTIVE\",\n  \"passwordStatus\": \"PERMANENT\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-institution/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-institution",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All User Profiles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-institution/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-institution",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User Profile by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-institution/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-institution",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User Profile by Keycloak ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-institution/users/keycloak/{{keycloak_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-institution",
+								"users",
+								"keycloak",
+								"{{keycloak_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"student001_updated\",\n  \"firstname\": \"Pedro Actualizado\",\n  \"lastname\": \"Martínez\",\n  \"email\": \"student_updated@vallegrande.edu.pe\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"55667788\",\n  \"phone\": \"+51333444555\",\n  \"status\": \"ACTIVE\",\n  \"passwordStatus\": \"PERMANENT\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-institution/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-institution",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User Profile",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user-institution/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user-institution",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Authentication (/api/v1/auth)",
+			"item": [
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"{{reset_token}}\",\n  \"newPassword\": \"NewPassword123!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/reset-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"reset-password"
+							]
+						}
+					}
+				},
+				{
+					"name": "Force Password Change",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"keycloakId\": \"{{keycloak_id}}\",\n  \"currentPassword\": \"currentPassword123\",\n  \"newPassword\": \"NewPassword123!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/force-password-change",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"force-password-change"
+							]
+						}
+					}
+				},
+				{
+					"name": "Generate Reset Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/generate-reset-token/{{keycloak_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"generate-reset-token",
+								"{{keycloak_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Password Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/password-status/{{keycloak_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"password-status",
+								"{{keycloak_id}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Keycloak Token Generation",
+			"item": [
+				{
+					"name": "Get Token with Password Grant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "auth-school-client",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://auth.vallegrande.edu.pe/realms/auth-school/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"auth",
+								"vallegrande",
+								"edu",
+								"pe"
+							],
+							"path": [
+								"realms",
+								"auth-school",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Token with Client Credentials",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "admin-cli",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://auth.vallegrande.edu.pe/realms/auth-school/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"auth",
+								"vallegrande",
+								"edu",
+								"pe"
+							],
+							"path": [
+								"realms",
+								"auth-school",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Web Controllers",
+			"item": [
+				{
+					"name": "Reset Password Form",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/reset-password?token={{reset_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reset-password"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{reset_token}}"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8100",
+			"type": "string"
+		},
+		{
+			"key": "keycloak_url",
+			"value": "https://auth.vallegrande.edu.pe",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "RPdFfzBIKDt3vL2DoROsg7nPNn1CTktd",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "testuser",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "favio123",
+			"type": "string"
+		},
+		{
+			"key": "keycloak_id",
+			"value": "your-keycloak-id-here",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "your-mongodb-id-here",
+			"type": "string"
+		},
+		{
+			"key": "reset_token",
+			"value": "your-reset-token-here",
+			"type": "string"
+		}
+	]
+}

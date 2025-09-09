@@ -1,0 +1,262 @@
+{
+  "info": {
+    "name": "User Institution Management API",
+    "description": "Colección completa para probar todos los endpoints de gestión usuario-institución",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8100/api/v1/user-institution"
+    },
+    {
+      "key": "userId",
+      "value": "68b8eb9c3bd340fcaa9ca81fb"
+    },
+    {
+      "key": "institutionId",
+      "value": "inst-vallegrande-001"
+    },
+    {
+      "key": "institutionId2",
+      "value": "inst-vallegrande-002"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Crear Asignación Usuario-Institución",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"institutionId\": \"{{institutionId}}\",\n  \"role\": \"TEACHER\",\n  \"assignmentDate\": \"2025-09-07T08:00:00\",\n  \"endDate\": \"2025-12-31T17:00:00\",\n  \"description\": \"Profesor de Matemáticas - Nivel Secundaria\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/assign-institution",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "assign-institution"]
+        }
+      }
+    },
+    {
+      "name": "2. Crear Segunda Asignación",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"institutionId\": \"{{institutionId2}}\",\n  \"role\": \"ADMIN\",\n  \"assignmentDate\": \"2025-08-01T08:00:00\",\n  \"description\": \"Administrador de sede principal\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/assign-institution",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "assign-institution"]
+        }
+      }
+    },
+    {
+      "name": "3. Obtener Todas las Relaciones",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "4. Obtener Usuarios por Institución",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/users/by-institution/{{institutionId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "by-institution", "{{institutionId}}"]
+        }
+      }
+    },
+    {
+      "name": "5. Actualizar Rol en Institución",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newRole\": \"COORDINATOR\",\n  \"description\": \"Promoción a Coordinador Académico\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/{{institutionId}}/roles",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "{{institutionId}}", "roles"]
+        }
+      }
+    },
+    {
+      "name": "6. Desactivar Asignación Específica",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/{{institutionId}}/deactivate",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "{{institutionId}}", "deactivate"]
+        }
+      }
+    },
+    {
+      "name": "7. Activar Asignación Específica",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/{{institutionId}}/activate",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "{{institutionId}}", "activate"]
+        }
+      }
+    },
+    {
+      "name": "8. Desactivar TODAS las Asignaciones",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/deactivate-all",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "deactivate-all"]
+        }
+      }
+    },
+    {
+      "name": "9. Activar TODAS las Asignaciones",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/activate-all",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "activate-all"]
+        }
+      }
+    },
+    {
+      "name": "10. Cambiar Estado Global - INACTIVE",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/status?status=INACTIVE",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "status"],
+          "query": [
+            {
+              "key": "status",
+              "value": "INACTIVE"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "11. Cambiar Estado Global - ACTIVE",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/status?status=ACTIVE",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "status"],
+          "query": [
+            {
+              "key": "status",
+              "value": "ACTIVE"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "12. Cambiar Estado Global - SUSPENDED",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/status?status=SUSPENDED",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "status"],
+          "query": [
+            {
+              "key": "status",
+              "value": "SUSPENDED"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "13. Obtener Relación Específica",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/{{institutionId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "{{institutionId}}"]
+        }
+      }
+    },
+    {
+      "name": "14. Obtener Todas las Relaciones de Usuario",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions"]
+        }
+      }
+    },
+    {
+      "name": "15. Verificar si Existen Relaciones",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/exists",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "exists"]
+        }
+      }
+    },
+    {
+      "name": "16. Eliminar Asignación Específica",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/{{institutionId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "{{institutionId}}"]
+        }
+      }
+    },
+    {
+      "name": "17. Eliminar TODAS las Relaciones",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/users/{{userId}}/institutions/all",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "{{userId}}", "institutions", "all"]
+        }
+      }
+    }
+  ]
+}
