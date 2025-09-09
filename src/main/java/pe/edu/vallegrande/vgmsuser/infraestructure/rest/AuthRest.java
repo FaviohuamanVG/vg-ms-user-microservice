@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/reset")
 @RequiredArgsConstructor
 public class AuthRest {
 

@@ -3,7 +3,7 @@ spring:
     name: vg-ms-user
   data:
     mongodb:
-      uri: mongodb+srv://huamantirado2006:1Cl61RtNEUNI2Pz0@cluster0.ahl0qgf.mongodb.net/PRS_proyect?retryWrites=true&w=majority&appName=Cluster0
+      uri: mongodb+srv://huamantirado2006:1Cl61RtNEUNI2Pz0@cluster0.ahl0qgf.mongodb.net/PRS_proyect?retryWrites=true&w=majority&appName=Cluster0&ssl=true&sslInvalidHostNameAllowed=true
   mail:
     host: smtp.gmail.com
     port: 587
