@@ -284,21 +284,9 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
         return relationRepository.findByUserId(userId)
                 .switchIfEmpty(Mono.error(new RuntimeException("User-Institution relation not found")))
                 .flatMap(relation -> {
-                    // Desactivar TODAS las asignaciones individuales
+                    // Desactivar TODAS las asignaciones individuales (sin historial)
                     relation.getInstitutionAssignments().forEach(assignment -> {
-                        AssignmentStatus previousStatus = assignment.getStatus();
                         assignment.setStatus(AssignmentStatus.INACTIVE);
-                        
-                        // Agregar movimiento de desactivación masiva si cambió el estado
-                        if (previousStatus != AssignmentStatus.INACTIVE) {
-                            assignment.getMovements().add(AssignmentMovement.builder()
-                                    .date(LocalDateTime.now())
-                                    .action(AssignmentAction.STATUS_CHANGED)
-                                    .description("Desactivación masiva de todas las asignaciones")
-                                    .oldStatus(previousStatus)
-                                    .newStatus(AssignmentStatus.INACTIVE)
-                                    .build());
-                        }
                     });
                     
                     relation.setUpdatedAt(LocalDateTime.now());
@@ -313,21 +301,9 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
         return relationRepository.findByUserId(userId)
                 .switchIfEmpty(Mono.error(new RuntimeException("User-Institution relation not found")))
                 .flatMap(relation -> {
-                    // Activar TODAS las asignaciones individuales
+                    // Activar TODAS las asignaciones individuales (sin historial)
                     relation.getInstitutionAssignments().forEach(assignment -> {
-                        AssignmentStatus previousStatus = assignment.getStatus();
                         assignment.setStatus(AssignmentStatus.ACTIVE);
-                        
-                        // Agregar movimiento de activación masiva si cambió el estado
-                        if (previousStatus != AssignmentStatus.ACTIVE) {
-                            assignment.getMovements().add(AssignmentMovement.builder()
-                                    .date(LocalDateTime.now())
-                                    .action(AssignmentAction.STATUS_CHANGED)
-                                    .description("Activación masiva de todas las asignaciones")
-                                    .oldStatus(previousStatus)
-                                    .newStatus(AssignmentStatus.ACTIVE)
-                                    .build());
-                        }
                     });
                     
                     relation.setUpdatedAt(LocalDateTime.now());
