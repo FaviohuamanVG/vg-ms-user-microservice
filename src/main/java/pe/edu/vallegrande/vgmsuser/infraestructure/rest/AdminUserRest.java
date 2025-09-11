@@ -19,7 +19,6 @@ import java.net.URISyntaxException;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user-admin")
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class AdminUserRest {
 
