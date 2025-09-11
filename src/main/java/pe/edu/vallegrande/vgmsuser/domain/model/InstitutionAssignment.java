@@ -25,5 +25,5 @@ public class InstitutionAssignment {
     private List<AssignmentMovement> movements = new java.util.ArrayList<>();
     
     @Builder.Default
-    private AssignmentStatus status = AssignmentStatus.ACTIVE;
+    private AssignmentStatus status = AssignmentStatus.A;
 }

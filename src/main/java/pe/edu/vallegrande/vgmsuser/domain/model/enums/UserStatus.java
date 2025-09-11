@@ -1,8 +1,8 @@
 package pe.edu.vallegrande.vgmsuser.domain.model.enums;
 
 public enum UserStatus {
-    ACTIVE("ACTIVE"),
-    INACTIVE("INACTIVE"),
+    A("A"),             // Active
+    I("I"),             // Inactive
     PENDING("PENDING"),
     SUSPENDED("SUSPENDED");
 

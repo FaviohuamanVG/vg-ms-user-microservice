@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user-director")
+
 @RequiredArgsConstructor
 public class UserManagementRest {
 

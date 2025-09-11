@@ -1,8 +1,8 @@
 package pe.edu.vallegrande.vgmsuser.domain.model.enums;
 
 public enum AssignmentStatus {
-    ACTIVE,
-    INACTIVE,
+    A,          // Active
+    I,          // Inactive
     SUSPENDED,
     TERMINATED
 }

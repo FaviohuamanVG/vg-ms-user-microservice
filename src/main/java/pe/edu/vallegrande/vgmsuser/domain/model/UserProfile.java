@@ -50,7 +50,7 @@ public class UserProfile {
     private String phone;
     
     @Builder.Default
-    private UserStatus status = UserStatus.ACTIVE;
+    private UserStatus status = UserStatus.A;
     
     @Builder.Default
     private PasswordStatus passwordStatus = PasswordStatus.TEMPORARY;

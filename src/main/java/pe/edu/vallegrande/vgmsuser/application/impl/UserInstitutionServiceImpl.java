@@ -39,7 +39,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                 .switchIfEmpty(Mono.error(new RuntimeException("Usuario no encontrado con ID: " + userId)))
                 .flatMap(userProfile -> {
                     // Validar que el usuario está activo
-                    if (userProfile.getStatus() != UserStatus.ACTIVE) {
+                    if (userProfile.getStatus() != UserStatus.A) {
                         return Mono.error(new RuntimeException("El usuario no está activo. Estado actual: " + userProfile.getStatus()));
                     }
                     
@@ -53,7 +53,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                 // Verificar si ya existe una asignación a esta institución
                                 boolean alreadyAssigned = relation.getInstitutionAssignments().stream()
                                         .anyMatch(assignment -> assignment.getInstitutionId().equals(request.getInstitutionId())
-                                                && assignment.getStatus() == AssignmentStatus.ACTIVE);
+                                                && assignment.getStatus() == AssignmentStatus.A);
                                 
                                 if (alreadyAssigned) {
                                     return Mono.error(new RuntimeException("El usuario ya está asignado a esta institución"));
@@ -65,7 +65,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                         .role(request.getRole())
                                         .assignmentDate(request.getAssignmentDate() != null ? request.getAssignmentDate() : LocalDateTime.now())
                                         .endDate(request.getEndDate())
-                                        .status(AssignmentStatus.ACTIVE)
+                                        .status(AssignmentStatus.A)
                                         .movements(new ArrayList<>())
                                         .build();
                                 
@@ -74,7 +74,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                         .date(LocalDateTime.now())
                                         .action(AssignmentAction.ASSIGNED)
                                         .newRole(request.getRole())
-                                        .newStatus(AssignmentStatus.ACTIVE)
+                                        .newStatus(AssignmentStatus.A)
                                         .description(request.getDescription() != null ? request.getDescription() : 
                                                 "Asignación inicial de " + userProfile.getFirstname() + " " + userProfile.getLastname() + 
                                                 " como " + request.getRole())
@@ -114,14 +114,14 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                             .flatMap(relation -> {
                                 // Buscar la asignación activa actual
                                 InstitutionAssignment currentAssignment = relation.getInstitutionAssignments().stream()
-                                        .filter(a -> a.getInstitutionId().equals(institutionId) && a.getStatus() == AssignmentStatus.ACTIVE)
+                                        .filter(a -> a.getInstitutionId().equals(institutionId) && a.getStatus() == AssignmentStatus.A)
                                         .findFirst()
                                         .orElseThrow(() -> new RuntimeException("Asignación activa no encontrada"));
                                 
                                 InstitutionRole oldRole = currentAssignment.getRole();
                                 
-                                // 1. CAMBIAR EL ESTADO A INACTIVE (temporalmente)
-                                currentAssignment.setStatus(AssignmentStatus.INACTIVE);
+                                // 1. CAMBIAR EL ESTADO A I (temporalmente)
+                                currentAssignment.setStatus(AssignmentStatus.I);
                                 
                                 // Agregar movimiento de terminación del rol anterior
                                 AssignmentMovement terminationMovement = AssignmentMovement.builder()
@@ -129,8 +129,8 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                         .action(AssignmentAction.STATUS_CHANGED)
                                         .oldRole(oldRole)
                                         .newRole(null)
-                                        .oldStatus(AssignmentStatus.ACTIVE)
-                                        .newStatus(AssignmentStatus.INACTIVE)
+                                        .oldStatus(AssignmentStatus.A)
+                                        .newStatus(AssignmentStatus.I)
                                         .description("Rol " + oldRole + " terminado para cambio a " + request.getNewRole())
                                         .build();
                                 
@@ -138,7 +138,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                 
                                 // 2. ACTUALIZAR EL ROL Y REACTIVAR
                                 currentAssignment.setRole(request.getNewRole());
-                                currentAssignment.setStatus(AssignmentStatus.ACTIVE);
+                                currentAssignment.setStatus(AssignmentStatus.A);
                                 
                                 // Agregar movimiento de cambio de rol (con nueva activación)
                                 AssignmentMovement roleChangeMovement = AssignmentMovement.builder()
@@ -146,8 +146,8 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                         .action(AssignmentAction.ROLE_CHANGED)
                                         .oldRole(oldRole)
                                         .newRole(request.getNewRole())
-                                        .oldStatus(AssignmentStatus.INACTIVE)
-                                        .newStatus(AssignmentStatus.ACTIVE)
+                                        .oldStatus(AssignmentStatus.I)
+                                        .newStatus(AssignmentStatus.A)
                                         .description(request.getDescription() != null ? request.getDescription() : 
                                                 "Cambio de rol de " + userProfile.getFirstname() + " " + userProfile.getLastname() + 
                                                 " de " + oldRole + " a " + request.getNewRole())
@@ -168,14 +168,14 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
     public Mono<UserInstitutionRelation> deactivateUserInstitutionAssignment(String userId, String institutionId) {
         log.info("Deactivating assignment for user {} in institution {}", userId, institutionId);
         
-        return updateAssignmentStatus(userId, institutionId, AssignmentStatus.INACTIVE, "Assignment deactivated");
+        return updateAssignmentStatus(userId, institutionId, AssignmentStatus.I, "Assignment deactivated");
     }
 
     @Override
     public Mono<UserInstitutionRelation> activateUserInstitutionAssignment(String userId, String institutionId) {
         log.info("Activating assignment for user {} in institution {}", userId, institutionId);
         
-        return updateAssignmentStatus(userId, institutionId, AssignmentStatus.ACTIVE, "Assignment activated");
+        return updateAssignmentStatus(userId, institutionId, AssignmentStatus.A, "Assignment activated");
     }
 
     @Override
@@ -286,7 +286,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                 .flatMap(relation -> {
                     // Desactivar TODAS las asignaciones individuales (sin historial)
                     relation.getInstitutionAssignments().forEach(assignment -> {
-                        assignment.setStatus(AssignmentStatus.INACTIVE);
+                        assignment.setStatus(AssignmentStatus.I);
                     });
                     
                     relation.setUpdatedAt(LocalDateTime.now());
@@ -303,7 +303,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                 .flatMap(relation -> {
                     // Activar TODAS las asignaciones individuales (sin historial)
                     relation.getInstitutionAssignments().forEach(assignment -> {
-                        assignment.setStatus(AssignmentStatus.ACTIVE);
+                        assignment.setStatus(AssignmentStatus.A);
                     });
                     
                     relation.setUpdatedAt(LocalDateTime.now());
@@ -315,7 +315,7 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
         UserInstitutionRelation newRelation = UserInstitutionRelation.builder()
                 .userId(userId)
                 .institutionAssignments(new ArrayList<>())
-                .status(UserStatus.ACTIVE)
+                .status(UserStatus.A)
                 .createdAt(LocalDateTime.now())
                 .build();
         

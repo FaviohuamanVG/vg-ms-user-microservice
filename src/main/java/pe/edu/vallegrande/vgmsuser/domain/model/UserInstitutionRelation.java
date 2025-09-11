@@ -33,5 +33,5 @@ public class UserInstitutionRelation {
     private LocalDateTime updatedAt;
     
     @Builder.Default
-    private UserStatus status = UserStatus.ACTIVE; // estado general de la transacción
+    private UserStatus status = UserStatus.A; // estado general de la transacción
 }
