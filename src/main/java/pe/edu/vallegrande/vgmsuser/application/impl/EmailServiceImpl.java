@@ -31,7 +31,7 @@ public class EmailServiceImpl implements IEmailService {
     @Value("${server.port:8100}")
     private String serverPort;
     
-    @Value("${app.frontend.url:http://localhost:8100}")
+    @Value("${app.frontend.url:https://lab.vallegrande.edu.pe/school/gateway}")
     private String frontendUrl;
 
     @Override
