@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: academic
+  data:
+    mongodb:
+      uri: mongodb+srv://faviohuaman:whQVhuBsOgu0C0M4@cluster0.zkqvx.mongodb.net/PRS_proyect?retryWrites=true&w=majority&appName=Cluster0
+
+server:
+  port: 8103
