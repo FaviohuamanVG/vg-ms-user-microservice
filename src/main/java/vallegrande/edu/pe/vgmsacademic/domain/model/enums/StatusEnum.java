@@ -2,7 +2,9 @@ package vallegrande.edu.pe.vgmsacademic.domain.model.enums;
 
 public enum StatusEnum {
     A("A"),
-    I("I");
+    I("I"),
+    C("C"),
+    T("T");
     
     private final String value;
     

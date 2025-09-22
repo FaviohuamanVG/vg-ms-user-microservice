@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/courses")
 @Validated
-
+@CrossOrigin(origins = "*")
 public class CourseRest {
     
     @Autowired

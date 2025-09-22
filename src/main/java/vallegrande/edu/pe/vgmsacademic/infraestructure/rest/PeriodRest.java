@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/periods")
 @Validated
-
+@CrossOrigin(origins = "*")
 public class PeriodRest {
     
     @Autowired
