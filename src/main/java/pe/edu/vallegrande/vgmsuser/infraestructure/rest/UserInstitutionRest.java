@@ -20,7 +20,6 @@ import java.net.URISyntaxException;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user-institution")
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class UserInstitutionRest {
 
