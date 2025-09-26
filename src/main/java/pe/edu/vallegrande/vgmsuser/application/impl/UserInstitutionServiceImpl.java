@@ -140,6 +140,13 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                 currentAssignment.setRole(request.getNewRole());
                                 currentAssignment.setStatus(AssignmentStatus.A);
                                 
+                                // 3. ACTUALIZAR FECHAS (SIEMPRE, INCLUSO SI SON NULL)
+                                currentAssignment.setAssignmentDate(request.getAssignmentDate());
+                                currentAssignment.setEndDate(request.getEndDate());
+                                
+                                log.info("Fechas actualizadas - assignmentDate: {}, endDate: {}", 
+                                        request.getAssignmentDate(), request.getEndDate());
+                                
                                 // Agregar movimiento de cambio de rol (con nueva activación)
                                 AssignmentMovement roleChangeMovement = AssignmentMovement.builder()
                                         .date(LocalDateTime.now())
@@ -156,8 +163,9 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                 currentAssignment.getMovements().add(roleChangeMovement);
                                 relation.setUpdatedAt(LocalDateTime.now());
                                 
-                                log.info("Rol actualizado exitosamente para usuario: {} de {} a {} (misma asignación)", 
-                                        userProfile.getUsername(), oldRole, request.getNewRole());
+                                log.info("Rol actualizado exitosamente para usuario: {} de {} a {} (assignmentDate: {}, endDate: {})", 
+                                        userProfile.getUsername(), oldRole, request.getNewRole(), 
+                                        request.getAssignmentDate(), request.getEndDate());
                                 
                                 return relationRepository.save(relation);
                             });
@@ -230,10 +238,11 @@ public class UserInstitutionServiceImpl implements IUserInstitutionService {
                                     return Mono.error(new RuntimeException("No se encontró asignación para la institución: " + institutionId));
                                 }
                                 
-                                // Si no quedan más asignaciones, eliminar todo el documento
+                                // Si no quedan más asignaciones, mantener el documento con lista vacía
                                 if (relation.getInstitutionAssignments().isEmpty()) {
-                                    log.info("No quedan más asignaciones, eliminando documento completo para usuario: {}", userProfile.getUsername());
-                                    return relationRepository.delete(relation);
+                                    log.info("No quedan más asignaciones, manteniendo documento con lista vacía para usuario: {}", userProfile.getUsername());
+                                    relation.setUpdatedAt(LocalDateTime.now());
+                                    return relationRepository.save(relation).then();
                                 } else {
                                     // Actualizar el documento sin la asignación eliminada
                                     relation.setUpdatedAt(LocalDateTime.now());

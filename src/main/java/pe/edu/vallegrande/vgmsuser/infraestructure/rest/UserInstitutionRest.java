@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user-institution")
-
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class UserInstitutionRest {
 
@@ -80,7 +80,8 @@ public class UserInstitutionRest {
             @PathVariable String userId,
             @PathVariable String institutionId,
             @Valid @RequestBody UpdateRoleRequest request) {
-        log.info("Updating role for user {} in institution {} to {}", userId, institutionId, request.getNewRole());
+        log.info("Updating role for user {} in institution {} to {} with assignmentDate: {} and endDate: {}", 
+                userId, institutionId, request.getNewRole(), request.getAssignmentDate(), request.getEndDate());
         
         return userInstitutionService.updateUserRoleInInstitution(userId, institutionId, request)
                 .map(ResponseEntity::ok)

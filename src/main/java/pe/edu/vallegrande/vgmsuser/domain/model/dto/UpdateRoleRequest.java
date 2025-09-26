@@ -4,6 +4,7 @@ import lombok.*;
 import pe.edu.vallegrande.vgmsuser.domain.model.enums.InstitutionRole;
 
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -15,4 +16,8 @@ public class UpdateRoleRequest {
     private InstitutionRole newRole;
     
     private String description;
+    
+    private LocalDateTime assignmentDate;
+    
+    private LocalDateTime endDate;
 }
